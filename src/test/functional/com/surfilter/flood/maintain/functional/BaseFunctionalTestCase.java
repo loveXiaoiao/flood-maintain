@@ -18,7 +18,7 @@ import org.springside.modules.test.jetty.JettyFactory;
 import org.springside.modules.test.spring.Profiles;
 import org.springside.modules.utils.PropertiesLoader;
 
-import com.surfilter.flood.maintain.QuickStartServer;
+import com.surfilter.flood.maintain.MaintainStart;
 
 /**
  * 功能测试基类.
@@ -65,8 +65,8 @@ public class BaseFunctionalTestCase {
 			// 设定Spring的profile
 			Profiles.setProfileAsSystemProperty(Profiles.FUNCTIONAL_TEST);
 
-			jettyServer = JettyFactory.createServerInSource(new URL(baseUrl).getPort(), QuickStartServer.CONTEXT);
-			JettyFactory.setTldJarNames(jettyServer, QuickStartServer.TLD_JAR_NAMES);
+			jettyServer = JettyFactory.createServerInSource(new URL(baseUrl).getPort(), MaintainStart.CONTEXT);
+			JettyFactory.setTldJarNames(jettyServer, MaintainStart.TLD_JAR_NAMES);
 			jettyServer.start();
 
 			logger.info("Jetty Server started at {}", baseUrl);

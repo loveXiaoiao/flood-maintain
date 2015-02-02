@@ -14,7 +14,7 @@ import org.springside.modules.test.spring.Profiles;
  * 
  * @author calvin
  */
-public class QuickStartServer {
+public class MaintainStart {
 
 	public static final int PORT = 8080;
 	public static final String CONTEXT = "/maintain";
