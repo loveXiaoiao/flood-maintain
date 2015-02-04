@@ -30,6 +30,7 @@
 				/register/** = anon
 				/admin/** = roles[admin]
 				/** = user
+				/main/** = anon
 			</value>
 		</property>
 	</bean>

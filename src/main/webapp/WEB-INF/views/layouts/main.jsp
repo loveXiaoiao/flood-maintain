@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@include file="/js/common/header.jsp" %>
+<%@include file="/WEB-INF/views/layouts/header.jsp" %>
+<title>哈哈</title>
 <script>
 $(function(){
-	Surfilter.main.init();//记载main.jsp的时候才初始化main.js
+	Surfilter.main.init();
 })
 </script>
 </head>
@@ -11,6 +12,7 @@ $(function(){
 <!-- 头部 start -->
 <div class="header">
   <div class="nav">
+  呵呵了
     <ul>
        <!-- 
 			一级菜单

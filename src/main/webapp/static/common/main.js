@@ -76,7 +76,7 @@ Surfilter.ns("main",{
 	 * 加载菜单项
 	 */
 	loadModule : function(menu){
-		this.getPage('modules/' + menu.id);
+		this.getPage('WEB-INF/views/' + menu.id);
 		$(Surfilter.getTopBody()).find('.main-left').css({width:200});
 		$(Surfilter.getTopBody()).find('.main').css({marginLeft:200});
 	},
@@ -96,7 +96,7 @@ Surfilter.ns("main",{
 	/**
 	 * 模拟菜单点击
 	 */
-	clickMenu : function(firstMenu, secondMenu, thirdMenu) {
+	clickMenu : function(firstMenu, secondMenu, thirdMenu) {//依次相应知道点击到顶级菜单对应的第一个叶子菜单
 		if(!firstMenu)return;
 		$(Surfilter.getTopBody()).find('.nav li').each(function(index, item) {
 			if ($(item).text() == firstMenu) {
