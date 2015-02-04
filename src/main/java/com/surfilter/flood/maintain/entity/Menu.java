@@ -5,6 +5,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 @Entity
 @Table(name = "ss_menu")
 public class Menu extends IdEntity {
@@ -12,6 +14,7 @@ public class Menu extends IdEntity {
 	/**
 	 * 菜单名称
 	 */
+	@NotBlank
 	private String name;
 	
 	/**
@@ -22,10 +25,12 @@ public class Menu extends IdEntity {
 	/**
 	 * 菜单级别
 	 */
+	@NotBlank
 	private Integer renderLevel;
 	/**
 	 * 菜单索引
 	 */
+	@NotBlank
 	private Integer showIndex;
 	/**
 	 * 父菜单
