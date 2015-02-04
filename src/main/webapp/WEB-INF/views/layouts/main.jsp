@@ -10,7 +10,7 @@ $(function(){
 </head>
 <body>
 <!-- 头部 start -->
-<div class="header">
+<div class="navbar navbar-inverse navbar-fixed-top">
   <div class="nav">
   呵呵了
     <ul>
