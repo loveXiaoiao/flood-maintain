@@ -11,8 +11,8 @@ $(function(){
 <body>
 <!-- 头部 start -->
 <div class="navbar navbar-inverse navbar-fixed-top">
-  <div class="nav">
-  呵呵了
+  <div class="navbar-inner">
+  	<b class="brand">舆情运维系统</b>
     <ul>
        <!-- 
 			一级菜单
