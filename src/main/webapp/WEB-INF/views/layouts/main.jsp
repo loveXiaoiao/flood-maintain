@@ -42,7 +42,7 @@ $(function(){
 <div class="container-fluid">
 <div class="row-fluid">
 	<!-- 内容左 start -->
-	<div class="span3">
+	<div class="span2">
 	<div class="well sidebar-nav">
 		<h1 class="nav-header"><!-- 任务管理 --></h1>
 		<ul class="nav nav-list">
@@ -56,7 +56,7 @@ $(function(){
   
   
 	 <!-- 内容右 start -->
-	 <div class="span9">
+	 <div class="span10">
 	<iframe class="main-right" id="mainPage" frameborder=0>
 	</iframe>
 	</div>

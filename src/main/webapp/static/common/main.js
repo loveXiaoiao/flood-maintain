@@ -13,7 +13,15 @@ Surfilter.ns("main",{
 	 */
 	initMenu : function(){
 		// 菜单缓存,暂时写死
-		Surfilter.menus = [{"checked":null,"expanded":true,"id":"","children":[{"checked":null,"expanded":true,"id":"","children":[{"checked":null,"expanded":true,"id":"/manageCenter/accountManage/bigAccountManage/bigAccountManageList.jsp","children":[],"text":"大号管理","leaf":true,"iconCls":"ico-dhgl","memo":null},{"checked":null,"expanded":true,"id":"/manageCenter/accountManage/smallAccountManage/smallAccountManageTab.jsp","children":[],"text":"小号管理","leaf":true,"iconCls":"ico-xhgl","memo":null},{"checked":null,"expanded":true,"id":"/manageCenter/accountManage/autoRegister/autoRegisterList.jsp","children":[],"text":"自动注册","leaf":true,"iconCls":"ico-zhgl","memo":null},{"checked":null,"expanded":true,"id":"/manageCenter/accountManage/registerTotal/registerTotalList.jsp","children":[],"text":"注册统计","leaf":true,"iconCls":"ico-zhgl","memo":null},{"checked":null,"expanded":true,"id":"/manageCenter/accountManage/smallAccountManage/smallAccountActiveList.jsp","children":[],"text":"帐号活跃","leaf":true,"iconCls":"ico-dhgl","memo":null}],"text":"账号管理","leaf":false,"iconCls":"ico-zhgl","memo":null},{"checked":null,"expanded":true,"id":"","children":[{"checked":null,"expanded":true,"id":"/manageCenter/materialManage/eventMaterialList.jsp","children":[],"text":"事件舆材","leaf":true,"iconCls":"ico-sjycgl","memo":null},{"checked":null,"expanded":true,"id":"/manageCenter/materialManage/netmanMaterialList.jsp","children":[],"text":"网民回复舆材","leaf":true,"iconCls":"ico-wmhfgl","memo":null},{"checked":null,"expanded":true,"id":"/manageCenter/materialManage/greateMaterialList.jsp","children":[],"text":"优秀舆材","leaf":true,"iconCls":"ico-yxycgl","memo":null}],"text":"舆材管理","leaf":false,"iconCls":"ico-ycgl","memo":null}],"text":"管理中心","leaf":false,"iconCls":"","memo":null}];
+		Surfilter.menus = "";
+		$.ajax({
+			url : ctx +  "/menu/getMenu",
+			async : false,
+			success : function(data){
+				Surfilter.menus = data;
+			}
+		});
+/*		 = [{"checked":null,"expanded":true,"id":"","children":[{"checked":null,"expanded":true,"id":"","children":[{"checked":null,"expanded":true,"id":"/manageCenter/accountManage/bigAccountManage/bigAccountManageList.jsp","children":[],"text":"大号管理","leaf":true,"iconCls":"ico-dhgl","memo":null},{"checked":null,"expanded":true,"id":"/manageCenter/accountManage/smallAccountManage/smallAccountManageTab.jsp","children":[],"text":"小号管理","leaf":true,"iconCls":"ico-xhgl","memo":null},{"checked":null,"expanded":true,"id":"/manageCenter/accountManage/autoRegister/autoRegisterList.jsp","children":[],"text":"自动注册","leaf":true,"iconCls":"ico-zhgl","memo":null},{"checked":null,"expanded":true,"id":"/manageCenter/accountManage/registerTotal/registerTotalList.jsp","children":[],"text":"注册统计","leaf":true,"iconCls":"ico-zhgl","memo":null},{"checked":null,"expanded":true,"id":"/manageCenter/accountManage/smallAccountManage/smallAccountActiveList.jsp","children":[],"text":"帐号活跃","leaf":true,"iconCls":"ico-dhgl","memo":null}],"text":"账号管理","leaf":false,"iconCls":"ico-zhgl","memo":null},{"checked":null,"expanded":true,"id":"","children":[{"checked":null,"expanded":true,"id":"/manageCenter/materialManage/eventMaterialList.jsp","children":[],"text":"事件舆材","leaf":true,"iconCls":"ico-sjycgl","memo":null},{"checked":null,"expanded":true,"id":"/manageCenter/materialManage/netmanMaterialList.jsp","children":[],"text":"网民回复舆材","leaf":true,"iconCls":"ico-wmhfgl","memo":null},{"checked":null,"expanded":true,"id":"/manageCenter/materialManage/greateMaterialList.jsp","children":[],"text":"优秀舆材","leaf":true,"iconCls":"ico-yxycgl","memo":null}],"text":"舆材管理","leaf":false,"iconCls":"ico-ycgl","memo":null}],"text":"管理中心","leaf":false,"iconCls":"","memo":null}];*/
 		/**
 		 * 重新建立一级菜单 HTML格式如下
 		 * <li><a href="#">任务管理</a></li>
@@ -22,7 +30,7 @@ Surfilter.ns("main",{
 		$(Surfilter.menus).each(function(firstLevelIndex,firstLevelMenu){//遍历菜单数组
 			$('<li class="active"><a href="#">'+ firstLevelMenu.text +'</a></li>').appendTo('.navbar-inner ul').click(function(){
 				// 显示二级菜单
-				$('.container-fluid').find('.span3').show();
+				$('.container-fluid').find('.span2').show();
 				
 				$(this).siblings().removeClass('active').end().addClass('active');
 				
