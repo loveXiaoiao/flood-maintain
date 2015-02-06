@@ -59,9 +59,8 @@ public class UserAdminController {
 	public Page<User> getPageModel(HttpServletRequest request,User entity,Integer page,Integer rows){
 		Map<String, Object> searchParams = Servlets.getParametersStartingWith(request, "search_");
 		Page<User> pages = null;
-		Sort sort = null;
 		try{
-			pages = accountService.getEntityList(searchParams, PageUtil.get(page, rows, sort));
+			pages = accountService.getEntityList(searchParams, PageUtil.get(page, rows));
 			
 		}catch(ServiceException e){
 			e.printStackTrace();
