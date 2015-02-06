@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
@@ -14,6 +16,7 @@ import org.springside.modules.persistence.SearchFilter;
 
 import com.surfilter.flood.maintain.entity.Menu;
 import com.surfilter.flood.maintain.repository.MenuDao;
+import com.surfilter.flood.maintain.service.ServiceException;
 import com.surfilter.flood.maintain.vo.TreeNode;
 
 @Component
@@ -30,6 +33,12 @@ public class MenuService {
 	public List<Menu> getAllMenu(Map<String, Object> searchParams, Sort sort){
 		Specification<Menu> spec = buildSpecification(searchParams);
 		return menuDao.findAll(spec, sort);
+	}
+	
+	public Page<Menu> getEntityList(Map<String, Object> searchParams,PageRequest pageRequest) throws ServiceException{
+		Specification<Menu> spec = buildSpecification(searchParams);
+		Page<Menu> rows = menuDao.findAll(spec,pageRequest);
+		return rows;
 	}
 	
 	/**
