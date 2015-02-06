@@ -18,7 +18,7 @@
 	</form>
 </div>
 <!-- 列表区域 -->
-<div class="list padding20">
+<div name="gridParent">
 	<table UI-Module="listGrid">
 	</table>
 </div>

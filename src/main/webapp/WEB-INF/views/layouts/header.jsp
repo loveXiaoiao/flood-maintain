@@ -65,4 +65,3 @@
 		cityId : <%=currentUser.getCityId()%>,
 	}; --%>
 </script>
-<!--系统初始化javascript代码块end-->

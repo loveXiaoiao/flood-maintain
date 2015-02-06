@@ -38,6 +38,8 @@ Surfilter.define("user.userList",{
 		me.$grid.datagrid({
 			url : ctx + '/admin/user/listUser',
 			toolbar : toolbar,
+			height : 300,
+			fit : true,
 			frozenColumns : [ [ {
 				field : 'ck',
 				checkbox : true
@@ -62,10 +64,7 @@ Surfilter.define("user.userList",{
 				width : 1,
 				align : 'center'
 			}]],
-			queryParams : me.$form.getFormValues(),
-			onLoadSuccess:function(data){
-				me.$grid.find(".datagrid-wrap").css({width:1100,height:300});
-			}
+			queryParams : me.$form.getFormValues()
 		});
 	}
 })

@@ -14,7 +14,11 @@ Surfilter.define("common.listModules",{
 		me.$form = $('[UI-Module=listForm]');
 		me.$grid = $('[UI-Module=listGrid]');
 		
+		me.$div = $('div[name=gridParent]');
+		me.$div.css({width:1100,height:400});
+		
 		me.initGrid();
+		
 		me.resetGridSize();
 		
 		me.$form.keypress(function(event){
@@ -26,10 +30,12 @@ Surfilter.define("common.listModules",{
 		
 		me.$form.find("button:contains('查询')").click(function(){
 				me.query();
+				me.resetGridSize();
 		});
 		
 		me.$form.find("button:contains('重置')").click(function(){
 			me.reset();
+			me.resetGridSize();
 		});
 		
 		me.$form.find('.combobox-f').combobox({
@@ -73,6 +79,6 @@ Surfilter.define("common.listModules",{
 	 */
 	resetGridSize : function(){
 		var me = this;
-		me.$grid.parent().height($(document.body).height() - me.$form.parent().get(0).offsetHeight);
+		$("#mainPage").contents().find('body').find(".datagrid-wrap").css({width:1100,height:300})
 	}
 },true)
