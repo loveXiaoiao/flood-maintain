@@ -1,3 +1,5 @@
+
+
 Surfilter.define("common.listModules",{
 	/**
 	 * 模块名称
@@ -8,6 +10,12 @@ Surfilter.define("common.listModules",{
 	 * 基类初始化方法
 	 */
 	init : function(){
+		
+		var h=document.documentElement.clientHeight;
+		//alert(h);
+		var m=h-125;
+		$("#list_tab").height(m);
+		
 		//引用自身，以防在子域中this冲突混乱
 		var me = this;
 		//特有的作为form和grid的标示
@@ -15,7 +23,6 @@ Surfilter.define("common.listModules",{
 		me.$grid = $('[UI-Module=listGrid]');
 		
 		me.$div = $('div[name=gridParent]');
-		me.$div.css({width:1100,height:400});
 		
 		me.initGrid();
 		
