@@ -6,10 +6,16 @@
 package com.surfilter.flood.maintain.web.account;
 
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.hibernate.engine.jdbc.connections.internal.UserSuppliedConnectionProviderImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,9 +23,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springside.modules.web.Servlets;
 
 import com.surfilter.flood.maintain.entity.User;
+import com.surfilter.flood.maintain.service.ServiceException;
 import com.surfilter.flood.maintain.service.account.AccountService;
 
 /**
@@ -33,6 +42,30 @@ public class UserAdminController {
 
 	@Autowired
 	private AccountService accountService;
+	
+	
+	/**
+	 * 
+	 * @param request
+	 * @param entity
+	 * @param page 页数
+	 * @param rows 每页行数
+	 * @return
+	 */
+	@RequestMapping("listUser")
+	@ResponseBody
+	public Page<User> getPageModel(HttpServletRequest request,User entity,Integer page,Integer rows){
+		Map<String, Object> searchParams = Servlets.getParametersStartingWith(request, "search_");
+		Page<User> pages = null;
+		try{
+			Sort sort = new Sort(Direction.ASC, "id");
+			pages = accountService.getEntityList(searchParams, page, rows, sort);
+			
+		}catch(ServiceException e){
+			e.printStackTrace();
+		}
+		return pages;
+	}
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(Model model) {
@@ -41,6 +74,7 @@ public class UserAdminController {
 
 		return "account/adminUserList";
 	}
+	
 
 	@RequestMapping(value = "update/{id}", method = RequestMethod.GET)
 	public String updateForm(@PathVariable("id") Long id, Model model) {
