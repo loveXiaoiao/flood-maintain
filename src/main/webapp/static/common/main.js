@@ -20,7 +20,6 @@ Surfilter.ns("main",{
 				Surfilter.menus = data;
 			}
 		});
-/*		 = [{"checked":null,"expanded":true,"id":"","children":[{"checked":null,"expanded":true,"id":"","children":[{"checked":null,"expanded":true,"id":"/manageCenter/accountManage/bigAccountManage/bigAccountManageList.jsp","children":[],"text":"大号管理","leaf":true,"iconCls":"ico-dhgl","memo":null},{"checked":null,"expanded":true,"id":"/manageCenter/accountManage/smallAccountManage/smallAccountManageTab.jsp","children":[],"text":"小号管理","leaf":true,"iconCls":"ico-xhgl","memo":null},{"checked":null,"expanded":true,"id":"/manageCenter/accountManage/autoRegister/autoRegisterList.jsp","children":[],"text":"自动注册","leaf":true,"iconCls":"ico-zhgl","memo":null},{"checked":null,"expanded":true,"id":"/manageCenter/accountManage/registerTotal/registerTotalList.jsp","children":[],"text":"注册统计","leaf":true,"iconCls":"ico-zhgl","memo":null},{"checked":null,"expanded":true,"id":"/manageCenter/accountManage/smallAccountManage/smallAccountActiveList.jsp","children":[],"text":"帐号活跃","leaf":true,"iconCls":"ico-dhgl","memo":null}],"text":"账号管理","leaf":false,"iconCls":"ico-zhgl","memo":null},{"checked":null,"expanded":true,"id":"","children":[{"checked":null,"expanded":true,"id":"/manageCenter/materialManage/eventMaterialList.jsp","children":[],"text":"事件舆材","leaf":true,"iconCls":"ico-sjycgl","memo":null},{"checked":null,"expanded":true,"id":"/manageCenter/materialManage/netmanMaterialList.jsp","children":[],"text":"网民回复舆材","leaf":true,"iconCls":"ico-wmhfgl","memo":null},{"checked":null,"expanded":true,"id":"/manageCenter/materialManage/greateMaterialList.jsp","children":[],"text":"优秀舆材","leaf":true,"iconCls":"ico-yxycgl","memo":null}],"text":"舆材管理","leaf":false,"iconCls":"ico-ycgl","memo":null}],"text":"管理中心","leaf":false,"iconCls":"","memo":null}];*/
 		/**
 		 * 重新建立一级菜单 HTML格式如下
 		 * <li><a href="#">任务管理</a></li>
@@ -51,12 +50,14 @@ Surfilter.ns("main",{
 						$secondMenu.click(function(event){
 						$(this).children('ul').show();
 						$(this).children('ul').find('li:first').click();//触发三级菜单的click事件
+						$(this).children('ul').find('li:first').addClass('actives');//叶子菜单为红色
+						$(this).siblings().removeClass('active').end().addClass('active');//父菜单
 					});
 						
 						$thirdMenu = $('<ul class="nav nav-list"/>');//三级菜单
 						$.each(secondLevelMenu.children,function(thirdLevelIndex,thirdLevelMenu){
 							$('<li><a href="#"><i class="ico ' + thirdLevelMenu.iconCls + '"></i>' + thirdLevelMenu.text + '</a></li>').appendTo($thirdMenu).click(function(event){
-								$(this).siblings().removeClass('active').end().addClass('active');
+								$(this).siblings().removeClass('actives').end().addClass('actives');
 								Surfilter.main.loadModule(thirdLevelMenu);
 								event.stopPropagation(); // 阻止事件冒泡，避免同步触发二级菜单点击事件
 							});
@@ -65,7 +66,7 @@ Surfilter.ns("main",{
 						$thirdMenu.appendTo($secondMenu); 
 					}else{
 						$secondMenu.click(function(){
-						$(this).addClass('active');
+						$(this).siblings().removeClass('active').end().addClass('active');
 						Surfilter.main.loadModule(secondLevelMenu);
 					});
 				}
@@ -77,6 +78,7 @@ Surfilter.ns("main",{
 				$('.sidebar-nav > ul li:first').click();
 			});
 		});
+		$('.navbar-inner ul').click();
 	},
 	
 	/**
