@@ -98,7 +98,7 @@ Surfilter.ns("main",{
 		}
 		$(Surfilter.getTopBody()).find('div.main').height(Surfilter.getTopBody().clientHeight - $(Surfilter.getTopBody()).find('div.header').height() - 5);
 		$(Surfilter.getTopBody()).find('#mainPage').get(0).src = resourceRoot + "/test/testIframe";
-		$(Surfilter.getTopBody()).find('#mainPage').css({width:1100,heigth:800});
+		$(Surfilter.getTopBody()).find('#mainPage').css({width:1100,height:500});
 	},
 	
 	/**
