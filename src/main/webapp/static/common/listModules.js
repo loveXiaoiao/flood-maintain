@@ -14,6 +14,9 @@ Surfilter.define("common.listModules",{
 		me.$form = $('[UI-Module=listForm]');
 		me.$grid = $('[UI-Module=listGrid]');
 		
+		me.initGrid();
+		me.resetGridSize();
+		
 		me.$form.keypress(function(event){
 			if(event.keyCode == 13){
 				me.query();
@@ -21,11 +24,11 @@ Surfilter.define("common.listModules",{
 			}
 		});
 		
-		me.find("button:contains('查询')").click(function(){
+		me.$form.find("button:contains('查询')").click(function(){
 				me.query();
 		});
 		
-		me.find("button:contains('重置')").click(function(){
+		me.$form.find("button:contains('重置')").click(function(){
 			me.reset();
 		});
 		
@@ -38,20 +41,38 @@ Surfilter.define("common.listModules",{
 	 * 查询
 	 */
 	query : function() {
-		
+/*		var me=this;
+		if(me.beforeQuery){
+			me.beforeQuery();
+		}*/
+		var me = this;
+		if (me.$form.form('validate')) {
+			var params = me.$form.getFormValues();
+			for(v in params){
+				if(params[v] && typeof params[v] == 'string'){
+					params[v] = params[v].trim();
+				}
+			}
+			me.$grid.datagrid("options").queryParams = params;
+			me.$grid.datagrid("load");
+		}
+
 	},
 	
 	/**
 	 * 重置查询条件
 	 */
 	reset : function() {
-		
+		var me = this;
+		me.$form.form('reset');
+		me.query();
 	},
 	
 	/**
 	 * 重设列表区尺寸
 	 */
 	resetGridSize : function(){
-		
+		var me = this;
+		me.$grid.parent().height($(document.body).height() - me.$form.parent().get(0).offsetHeight);
 	}
 },true)

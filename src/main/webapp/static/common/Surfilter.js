@@ -17,15 +17,17 @@
 		 * @content 定义对象
 		 */
 		this.ns = this.namespace = function(name, content, ingoreInit){
-			var names, defineObject, defineJsCode;
+			var names, defineJsCode,defineName;
 			names = name.split(".");
 			for(var i = 0; i < names.length; i++){
+				var defineObject = "";
 				for(j = 0; j < i + 1; j++){
-					defineName = "." + names[j];
+					defineObject += "." + names[j];
 				}
-				defineName = "Surfilter" + defineName;
+				defineName = "Surfilter" + defineObject;
 				defineJsCode = defineName + "=" + defineName + "|| {}";
 				eval(defineJsCode);
+				console.log(defineJsCode);
 				
 				// 最深层的对象定义
 				if (i == names.length - 1) {
