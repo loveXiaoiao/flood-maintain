@@ -17,19 +17,19 @@ Surfilter.define("user.userList",{
 		
 		var toolbar = [{
 			text : '新增',
-			iconCls : 'ico-add',
+			iconCls : 'btn btn-success',
 			handler : function(){
 				
 			}
 		},{
 			text : "修改",
-			iconCls : 'ico-add',
+			iconCls : 'btn btn-info',
 				handler : function(){
 				
 			}
 		},{
 			text : "删除",
-			iconCls : 'ico-add',
+			iconCls : 'btn btn-danger',
 				handler : function(){
 				
 			}

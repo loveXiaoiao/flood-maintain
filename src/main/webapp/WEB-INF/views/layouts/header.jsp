@@ -31,6 +31,7 @@
 <!-- 系统css -->
 <link type="text/css" media="screen"  href="${ctx}/static/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet"/>
 <link type="text/css" media="screen"  href="${ctx}/static/bootstrap/2.3.2/css/bootstrap-responsive.min.css" rel="stylesheet"/>
+<link type="text/css" media="screen"  href="${ctx}/static/bootstrap/2.3.2/css/style.css" rel="stylesheet"/>
 <!-- easyui css -->
 <!--****************************************第三方资源引入 end，请注意引入顺序****************************************-->
 <!-- 系统图片 -->

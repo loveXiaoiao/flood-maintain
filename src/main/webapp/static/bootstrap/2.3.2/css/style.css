@@ -1,0 +1,26 @@
+body{ font-family:"Î¢ÈíÑÅºÚ";}
+.nav-header{font-size:16px; text-shadow:none;color:#fff;}
+.well{background-color:#444; border:0; box-shadow:none; color:#fff;}
+.well:before{ content:""; width:200px; display:block; background-color:#444; 
+position:fixed; top:0; bottom:0; z-index:-1;}
+.container-fluid{ padding-left:0; padding-right:0;}
+.nav-list>li>a, .nav-list .nav-header{ text-shadow:none;}
+.well .nav-list{ width:100%; margin:0; padding:0;}
+.well>.nav-list>li{ font-size:14px;line-height:32px;}
+.nav-list>li>a, .nav-list .nav-header{ margin-left:0; margin-right:0;color:#fff;}
+.well .nav-list ul{width:200px; margin:0; padding:0;}
+.well .nav-list ul li a{ padding-left:20px;}
+.nav>li>a:hover{ background-color:#626161;}
+.nav>li>a:focus{background-color:#444;}
+.nav-list>.active>a, .nav-list>.active>a:hover, .nav-list>.active>a:focus{background-color:#ff0000;}
+.nav-list>.actives>a, .nav-list>.actives>a:hover, .nav-list>.actives>a:focus{background-color:#ff0000;}
+.navbar-inverse .brand{ color:#fff; margin-left:10px; float:left:}
+.navbar-inverse .brand:hover{ color:#fff;}
+.navbar .nav{ float:right; margin:0px 10px 0 0;}
+.datagrid-toolbar{ height:40px;}
+a.l-btn span span.l-btn-text{ width:50px; height:27px; line-height:27px;}
+a.l-btn span span.l-btn-icon-left{ padding-left:0;}
+.datagrid-cell, .datagrid-cell-group, .datagrid-header-rownumber, .datagrid-cell-rownumber.datagrid-wrap td{ height:35px; line-height:35px;}
+.datagrid-htable td{ background-color:#ececec;}
+.row-fluid .span10{width: 84.441880441880346%;}
+.row-fluid [class*="span"]{margin-left: 0.564102564102564%; margin-left: 0.564102564102564%;}

@@ -83,7 +83,7 @@ Surfilter.ns("main",{
 	 * 加载菜单项
 	 */
 	loadModule : function(menu){
-		this.getPage(ctx + menu.id);
+		this.getPage(menu.id);
 		$(Surfilter.getTopBody()).find('.main-left').css({width:200});
 		$(Surfilter.getTopBody()).find('.main').css({marginLeft:200});
 	},
@@ -97,8 +97,12 @@ Surfilter.ns("main",{
 			$(Surfilter.getTopBody()).find('.main').css({marginLeft:10});
 		}
 		$(Surfilter.getTopBody()).find('div.main').height(Surfilter.getTopBody().clientHeight - $(Surfilter.getTopBody()).find('div.header').height() - 5);
-		$(Surfilter.getTopBody()).find('#mainPage').get(0).src = resourceRoot + "/jump/user_userList";
-		$(Surfilter.getTopBody()).find('#mainPage').css({width:1100,height:500});
+		$(Surfilter.getTopBody()).find('#mainPage').get(0).src = resourceRoot + path;
+		//
+		var h=document.documentElement.clientHeight;
+		//alert(h);
+		var m=h-40;
+		$("#mainPage").height(m);
 	},
 	
 	/**

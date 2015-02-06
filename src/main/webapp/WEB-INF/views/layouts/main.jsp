@@ -4,8 +4,9 @@
 <title>哈哈</title>
     <style type="text/css">
       body {
-        padding-top: 60px;
-        padding-bottom: 40px;
+      font-family:"微软雅黑";
+        padding-top: 40px;
+        overflow-y:hidden;
       }
       .sidebar-nav {
         padding: 9px 0;
@@ -57,7 +58,7 @@ $(function(){
   
 	 <!-- 内容右 start -->
 	 <div class="span10">
-	<iframe class="main-right" id="mainPage" frameborder=0>
+	<iframe class="main-right" id="mainPage" frameborder=0 style="width:100%; overflow-y:hidden;">
 	</iframe>
 	</div>
 </div>
