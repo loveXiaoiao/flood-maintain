@@ -29,8 +29,8 @@
 				/js/** = anon
 				/api/** = anon
 				/register/** = anon
+				/main/** = authc
 				/admin/** = roles[admin]
-				/main/** = anon
 				/** = user
 			</value>
 		</property>
