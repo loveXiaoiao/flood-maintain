@@ -12,7 +12,6 @@ Surfilter.ns("main",{
 	 * 菜单初始化
 	 */
 	initMenu : function(){
-		// 菜单缓存,暂时写死
 		Surfilter.menus = "";
 		$.ajax({
 			url : ctx +  "/menu/getMenu",
@@ -84,7 +83,7 @@ Surfilter.ns("main",{
 	 * 加载菜单项
 	 */
 	loadModule : function(menu){
-		this.getPage('WEB-INF/views/' + menu.id);
+		this.getPage(ctx + menu.id);
 		$(Surfilter.getTopBody()).find('.main-left').css({width:200});
 		$(Surfilter.getTopBody()).find('.main').css({marginLeft:200});
 	},
@@ -98,7 +97,8 @@ Surfilter.ns("main",{
 			$(Surfilter.getTopBody()).find('.main').css({marginLeft:10});
 		}
 		$(Surfilter.getTopBody()).find('div.main').height(Surfilter.getTopBody().clientHeight - $(Surfilter.getTopBody()).find('div.header').height() - 5);
-		$(Surfilter.getTopBody()).find('#mainPage').get(0).src = resourceRoot + path;
+		$(Surfilter.getTopBody()).find('#mainPage').get(0).src = resourceRoot + "/test/testIframe";
+		$(Surfilter.getTopBody()).find('#mainPage').css({width:1100,heigth:800});
 	},
 	
 	/**
