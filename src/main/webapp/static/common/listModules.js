@@ -11,16 +11,15 @@ Surfilter.define("common.listModules",{
 	 */
 	init : function(){
 		
-		var h=document.documentElement.clientHeight;
-		//alert(h);
-		var m=h-125;
-		$("#list_tab").height(m);
-		
 		//引用自身，以防在子域中this冲突混乱
 		var me = this;
 		//特有的作为form和grid的标示
 		me.$form = $('[UI-Module=listForm]');
 		me.$grid = $('[UI-Module=listGrid]');
+		
+		var h=document.documentElement.clientHeight;
+		var m=h-20-me.$form.height();
+		$("#list_tab").height(m);
 		
 		me.$div = $('div[name=gridParent]');
 		
