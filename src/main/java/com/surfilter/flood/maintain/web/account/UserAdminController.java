@@ -13,8 +13,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -29,8 +27,9 @@ import org.springside.modules.web.Servlets;
 import com.surfilter.flood.maintain.entity.User;
 import com.surfilter.flood.maintain.service.ServiceException;
 import com.surfilter.flood.maintain.service.account.AccountService;
+import com.surfilter.flood.maintain.util.PageResult;
 import com.surfilter.flood.maintain.util.PageUtil;
-import com.surfilter.flood.maintain.vo.ResultObject;
+import com.surfilter.flood.maintain.util.ResultObject;
 
 /**
  * 管理员管理用户的Controller.
@@ -56,16 +55,19 @@ public class UserAdminController {
 	 */
 	@RequestMapping("listUser")
 	@ResponseBody
-	public Page<User> getPageModel(HttpServletRequest request,User entity,Integer page,Integer rows){
+	public PageResult getPageModel(HttpServletRequest request,User entity,Integer page,Integer rows){
 		Map<String, Object> searchParams = Servlets.getParametersStartingWith(request, "search_");
 		Page<User> pages = null;
+		PageResult pageResult = new PageResult(true);
 		try{
 			pages = accountService.getEntityList(searchParams, PageUtil.get(page, rows));
+			pageResult.setRows(pages.getContent());
+			pageResult.setTotal(pages.getTotalElements());
 			
 		}catch(ServiceException e){
 			e.printStackTrace();
 		}
-		return pages;
+		return pageResult;
 	}
 	@RequestMapping("saveUser")
 	@ResponseBody

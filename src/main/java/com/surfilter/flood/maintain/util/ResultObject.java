@@ -1,4 +1,4 @@
-package com.surfilter.flood.maintain.vo;
+package com.surfilter.flood.maintain.util;
 
 import java.io.Serializable;
 
