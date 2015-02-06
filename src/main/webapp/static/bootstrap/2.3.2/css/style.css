@@ -13,7 +13,7 @@ position:fixed; top:0; bottom:0; z-index:-1;}
 .nav>li>a:hover{ background-color:#626161;}
 .nav>li>a:focus{background-color:#444;}
 .nav-list>.active>a, .nav-list>.active>a:hover, .nav-list>.active>a:focus{background-color:#ff0000;}
-.nav-list>.actives>a, .nav-list>.actives>a:hover, .nav-list>.actives>a:focus{background-color:#ff0000;}
+.nav-list>.actives>a, .nav-list>.actives>a:hover, .nav-list>.actives>a:focus{background-color:#5f5f5f;}
 .navbar-inverse .brand{ color:#fff; margin-left:10px; float:left:}
 .navbar-inverse .brand:hover{ color:#fff;}
 .navbar .nav{ float:right; margin:0px 10px 0 0;}
