@@ -50,14 +50,14 @@ Surfilter.ns("main",{
 						$secondMenu.click(function(event){
 						$(this).children('ul').show();
 						$(this).children('ul').find('li:first').click();//触发三级菜单的click事件
-						$(this).children('ul').find('li:first').addClass('active');//叶子菜单为红色
-						$(this).siblings().removeClass('active').removeClass('actives').end().addClass('actives');//父菜单
+						$(this).children('ul').find('li:first').addClass('actives');//叶子菜单为红色
+						$(this).siblings().removeClass('active').end().addClass('active');//父菜单
 					});
 						
 						$thirdMenu = $('<ul class="nav nav-list"/>');//三级菜单
 						$.each(secondLevelMenu.children,function(thirdLevelIndex,thirdLevelMenu){
 							$('<li><a href="#"><i class="ico ' + thirdLevelMenu.iconCls + '"></i>' + thirdLevelMenu.text + '</a></li>').appendTo($thirdMenu).click(function(event){
-								$(this).siblings().removeClass('active').end().addClass('active');
+								$(this).siblings().removeClass('actives').end().addClass('actives');
 								Surfilter.main.loadModule(thirdLevelMenu);
 								event.stopPropagation(); // 阻止事件冒泡，避免同步触发二级菜单点击事件
 							});
@@ -66,7 +66,7 @@ Surfilter.ns("main",{
 						$thirdMenu.appendTo($secondMenu); 
 					}else{
 						$secondMenu.click(function(){
-						$(this).siblings().removeClass('active').removeClass('actives').end().addClass('active');
+						$(this).siblings().removeClass('active').end().addClass('active');
 						Surfilter.main.loadModule(secondLevelMenu);
 					});
 				}
