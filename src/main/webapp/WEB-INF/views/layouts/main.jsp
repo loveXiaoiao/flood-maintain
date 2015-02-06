@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/layouts/header.jsp" %>
-<title>哈哈</title>
+<title>舆情运维系统</title>
     <style type="text/css">
       body {
       font-family:"微软雅黑";
