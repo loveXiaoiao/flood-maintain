@@ -8,7 +8,7 @@ position:fixed; top:0; bottom:0; z-index:-1;}
 .well .nav-list{ width:100%; margin:0; padding:0;}
 .well>.nav-list>li{ font-size:14px;line-height:32px;}
 .nav-list>li>a, .nav-list .nav-header{ margin-left:0; margin-right:0;color:#fff;}
-.well .nav-list ul{width:198px; margin:0; padding:0;}
+.well .nav-list ul{width:100%; margin:0; padding:0;}
 .well .nav-list ul li a{ padding-left:20px;}
 .nav>li>a:hover{ background-color:#626161;}
 .nav>li>a:focus{background-color:#444;}
