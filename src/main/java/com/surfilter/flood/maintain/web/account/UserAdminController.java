@@ -11,7 +11,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import org.hibernate.engine.jdbc.connections.internal.UserSuppliedConnectionProviderImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
@@ -30,6 +29,8 @@ import org.springside.modules.web.Servlets;
 import com.surfilter.flood.maintain.entity.User;
 import com.surfilter.flood.maintain.service.ServiceException;
 import com.surfilter.flood.maintain.service.account.AccountService;
+import com.surfilter.flood.maintain.util.PageUtil;
+import com.surfilter.flood.maintain.vo.ResultObject;
 
 /**
  * 管理员管理用户的Controller.
@@ -42,6 +43,7 @@ public class UserAdminController {
 
 	@Autowired
 	private AccountService accountService;
+	private ResultObject resultObject = new ResultObject(true, "OK!");
 	
 	
 	/**
@@ -57,15 +59,52 @@ public class UserAdminController {
 	public Page<User> getPageModel(HttpServletRequest request,User entity,Integer page,Integer rows){
 		Map<String, Object> searchParams = Servlets.getParametersStartingWith(request, "search_");
 		Page<User> pages = null;
+		Sort sort = null;
 		try{
-			Sort sort = new Sort(Direction.ASC, "id");
-			pages = accountService.getEntityList(searchParams, page, rows, sort);
+			pages = accountService.getEntityList(searchParams, PageUtil.get(page, rows, sort));
 			
 		}catch(ServiceException e){
 			e.printStackTrace();
 		}
 		return pages;
 	}
+	@RequestMapping("saveUser")
+	@ResponseBody
+	public ResultObject saveUser(User entity, HttpServletRequest request) {
+		try {
+			if(entity.getId() != null){
+				accountService.updateUser(entity);
+			}else{
+				accountService.registerUser(entity);
+			}
+			resultObject.setMsg("保存成功");
+			resultObject.setSuccess(true);
+			return resultObject;
+		} catch (ServiceException e) {
+			e.printStackTrace();
+			resultObject.setMsg(e.getMessage());
+			resultObject.setSuccess(false);
+			return resultObject;
+		}
+	}
+	
+	@RequestMapping("deleteUser")
+	@ResponseBody
+	public ResultObject deleteUser(User entity, HttpServletRequest request) {
+		try {
+			accountService.deleteUser(entity.getId());
+			resultObject.setMsg("删除成功");
+			resultObject.setSuccess(true);
+			return resultObject;
+		} catch (ServiceException e) {
+			e.printStackTrace();
+			resultObject.setMsg("删除失败");
+			resultObject.setSuccess(false);
+			return resultObject;
+		}
+	}
+	
+	
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(Model model) {

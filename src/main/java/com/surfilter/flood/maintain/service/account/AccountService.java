@@ -48,8 +48,7 @@ public class AccountService {
 		return (List<User>) userDao.findAll();
 	}
 	
-	public Page<User> getEntityList(Map<String, Object> searchParams,Integer pageNo,Integer pageSize, Sort sort) throws ServiceException{
-		PageRequest pageRequest = new PageRequest(pageNo, pageSize, sort);
+	public Page<User> getEntityList(Map<String, Object> searchParams,PageRequest pageRequest) throws ServiceException{
 		Specification<User> spec = buildSpecification(searchParams);
 		Page<User> rows = userDao.findAll(spec,pageRequest);
 		return rows;
@@ -74,6 +73,9 @@ public class AccountService {
 	}
 
 	public void registerUser(User user) {
+		if(findUserByLoginName(user.getLoginName()) != null){
+			throw new ServiceException("用户名已存在");
+		}
 		entryptPassword(user);
 		user.setRoles("user");
 		user.setRegisterDate(clock.getCurrentDate());
@@ -82,6 +84,9 @@ public class AccountService {
 	}
 
 	public void updateUser(User user) {
+		if(findUserByLoginName(user.getLoginName()) != null){
+			throw new ServiceException("用户名已存在");
+		}
 		if (StringUtils.isNotBlank(user.getPlainPassword())) {
 			entryptPassword(user);
 		}
@@ -94,7 +99,7 @@ public class AccountService {
 			throw new ServiceException("不能删除超级管理员用户");
 		}
 		userDao.delete(id);
-		taskDao.deleteByUserId(id);
+//		taskDao.deleteByUserId(id);
 
 	}
 
