@@ -86,5 +86,27 @@ Surfilter.define("common.listModules",{
 	resetGridSize : function(){
 		var me = this;
 		$("#mainPage").contents().find('body').find(".datagrid-wrap").css({width:1100,height:300})
+	},
+	
+	/**
+	 * 触发警告之类的提示（有弹窗的）
+	 */
+	alertInfo : function(alertTitle,alertContent,isAlert){
+		if(isAlert){
+			$(Surfilter.getTopBody()).find("#myModalLabel").html(alertTitle);
+			$(Surfilter.getTopBody()).find("#modal_content").html(alertContent);
+			$(Surfilter.getTopBody()).find("#myModal").modal("show");
+		}else{
+			$("#addTitle").html(alertTitle);
+			$("#addModal").modal("show");
+		}
+	},
+	
+	/**
+	 * 警示之类的提示（无弹窗）
+	 */
+	alertDiv : function(alertDivName,content){
+		$(Surfilter.getTopBody()).find("#" + alertDivName + " > strong").html(content);
+		$(Surfilter.getTopBody()).find("#" + alertDivName + "").show();
 	}
 },true)

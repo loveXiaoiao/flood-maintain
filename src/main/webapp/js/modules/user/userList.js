@@ -19,7 +19,7 @@ Surfilter.define("user.userList",{
 			text : '新增',
 			iconCls : 'btn btn-success',
 			handler : function(){
-				me.showEditWindow("新增用户",null,1);
+				me.showEditWindow(1);
 			}
 		},{
 			text : "修改",
@@ -27,17 +27,21 @@ Surfilter.define("user.userList",{
 			handler : function(){
 				var sels = $("[UI-Module=listGrid]").datagrid("getChecked");
 				if (sels.length != 1) {
-					//Surfilter.easyuiUtil.pushMessage("必须且只能选择一个账号进行编辑操作");
-					model("Surfilter_i18n_message_common_pleaseSelectOnlyOne");
+					me.alertDiv("myAlertWarning","请选择一条记录进行操作！");
 					return;
 				}
-				me.showEditWindow("修改用户",sels[0],2);
+				me.showEditWindow(2,sels[0]);
 			}
 		},{
 			text : "删除",
 			iconCls : 'btn btn-danger',
 			handler : function(){
-				me.deleteUser();
+				var sels = $("[UI-Module=listGrid]").datagrid("getChecked");
+				if (sels.length != 1) {
+					me.alertDiv("myAlertWarning","请选择一条记录进行操作！");
+					return;
+				}
+				me.deleteUser(sels[0]);
 			}
 		}];
 		
@@ -77,117 +81,73 @@ Surfilter.define("user.userList",{
 	/**
 	 * 初始化编辑窗口
 	 */
-	showEditWindow : function(operate,data,operateId){
+	showEditWindow : function(addOrUpdateFlag,entity){
 		var me = this;
-		var $window = tipsWindown(operate + " " + me.moduleName,"id:listWindow","500","400%","true","","true","");
-		if(operate == 'Surfilter_i18n_operate_common_update'){
-			$window.find('input[name=loginName]').attr("readonly",'readonly');
+		if(addOrUpdateFlag == 1){
+			me.alertInfo("新增账号");
+			$("#loginName").val("").attr({disabled:false});;
+			$("#name").val("");
+			$("#roles").val("");
+		}else{
+			me.alertInfo("修改账号");//修改账号的初始化
+			$("#loginName").val(entity.loginName).attr({disabled:true});
+			$("#name").val(entity.name);
+			$("#roles").val(entity.roles);
 		}
-		// 初始化验证条件
-		$window.find('input[name=loginName]').validatebox({required:true});
-		$window.find('input[name=name]').validatebox({required:true});
-		// 所属地区
-		$window.find('input#province').combobox({
-			valueField:'id',
-			textField:'region',
-			url : ctx + '/config/area!listAllProvince.action',
-			onSelect: function(rec){
-				// 加载城市
-				var id = $window.find('input#province').combobox('getValue');
-				var url = ctx + '/config/area!listAllCity.action?id='+id;
-				$window.find('input#city').combobox({
-				    url:url,
-				    valueField:'id',
-				    textField:'region'
-				});
-	        }
-		});
-		$window.find('input#city').combobox();
-		//初始化角色树
-		$window.find("#user-info-tree").tree({
-			url : ctx + "/account/role!listNode.action",
-			checkbox : true
-		});
-		//检查并设置Ukey
-//		if(!data){
-//			Surfilter.systemManage.userManage.fillUkey();
-//		}
-		// 保存按钮
-		$window.find('.tipswindown-btn button').eq(0).click(function(){
-			$window.find('form').form('submit', {
-				method : 'post',
-				url: ctx + '/account/user!saveUser.action',
-				onSubmit: function(param){
-					// 角色权限
-					var checkedIds = [];
-					$.each($window.find('#user-info-tree').tree('getChecked','indeterminate'),function(index,item){
-						checkedIds.push(item.id);
-					});
-					$.each($window.find('#user-info-tree').tree('getChecked'),function(index,item){
-						checkedIds.push(item.id);
-					});
-					param.checkedRoleIds = checkedIds;
-					if(checkedIds.length==0){
-						Surfilter.easyuiUtil.pushMessage("请选择角色");
-						return false;
-					}else{
-						if(!checkedIds.some(function(data){if(data==2) return true;})){
-							if(!$window.find("#province").combobox("getSelected")){
-								Surfilter.easyuiUtil.pushMessage("创建省级管理员请选择地区");
-								return false;
-							}
-						}
+		$("#loginName").data("addOrUpdateFlag",addOrUpdateFlag);//缓存数据
+		$("#name").data("entity",entity);//缓存数据，因为到click方法里面会无效
+		$("#add_submit").click(function(){
+			var addOrUpdateFlag = $("#loginName").data("addOrUpdateFlag");
+			var entity = $("#name").data("entity");
+			var params = {};
+			if(addOrUpdateFlag == 2){//修改账号param多一个id的值
+				params['id'] = entity.id;
+			}
+			if(!$("#loginName").val()||!$("#name").val()||!$("#plainPassword").val()||!$("#roles").val()){
+				me.alertDiv("myAlertWarning","登陆账号，用户名，密码，角色均不能为空，请重新输入！");
+				return ;
+			}
+			params['loginName'] = $("#loginName").val();
+			params['name'] = $("#name").val();
+			params['plainPassword'] = $("#plainPassword").val();
+			params['roles'] = $("#roles").val();
+			$.ajax({
+				url : ctx + "/admin/user/saveUser",
+				data : params,
+				async : false,
+				success : function(data){
+					if(data.success){
+						me.alertDiv("myAlertSuccess",data.msg);
+						$("#loginName").val("").attr({disabled:false});
+						$("#name").val("");
+						$("#plainPassword").val("");
+						$("#roles").val("");
 					}
-					return $(this).form('validate');
-				},
-				success: function(data){
-					data = eval('(' + data + ')');
-					Surfilter.easyuiUtil.pushMessage(data.description);
-					if(data.ok){
-						me.$grid.datagrid("reload");
-						closeTipsWindown();
-					}
+					me.query();
+					return;
 				}
-			});
+			})
 		});
-		// 重置按钮
-		$window.find('.tipswindown-btn button').eq(1).click(function(){
-			$window.find('input[name=ukeyId]').val(data ? data.ukeyId : '');
-			$window.find('input[name=ukeyData]').val(data ? data.ukeyData : '');
-			$window.find('input[name=id]').val(data ? data.id : '');
-			$window.find('input[name=areaId]').val(data ? data.areaId : '');
-			$window.find('input[name=loginName]').val(data ? data.loginName : '');
-			$window.find('input[name=name]').val(data ? data.name : '');
-			$window.find('input[name=phone]').val(data ? data.phone : '');
-			$window.find('input[name=tel]').val(data ? data.tel : '');
-			$window.find('input[name=fax]').val(data ? data.fax : '');
-			$window.find('input[name=email]').val(data ? data.email : '');
-			$window.find('input[name=workAddress]').val(data ? data.workAddress : '');
-			
-			if(operateId==2){
-			if(data && data.provinceId){
-				$window.find('input#province').combobox('setValue',data.provinceId).combobox('options').onSelect();
-			}
-			if(data && data.cityId){
-				$window.find('input#city').combobox('setValue',data.cityId);
-			}
-			if(data && data.roleIds){
-				setTimeout(function(){
-					for (index in data.roleIds) {
-						$window.find('#user-info-tree').tree('check',$window.find('#user-info-tree').tree('find',data.roleIds[index]).target );
-					}
-				},500);
-				$window.find('#user-info-tree').tree('reload');
-			}
-		  }else if(operateId==1){
-			  $window.find('input#province').combobox('setValue','');
-			  $window.find('input#city').combobox('setValue','');
-			  $window.find('#user-info-tree').tree('reload');
-		  }
-		}).click();
 	},
+
 	
-	deleteUser : function(){
-		$(Surfilter.getTopBody()).find("#myModal").modal("show");
+	deleteUser : function(entity){
+		var me = this;
+		me.alertInfo("警告","确认删除吗？",true);
+		$(Surfilter.getTopBody()).find("#myModal").find("#modal_submit").click(function(){
+			$.ajax({
+				url : ctx + "/admin/user/deleteUser",
+				data : {
+					id : entity.id
+				},
+				async : false,
+				success : function(data){
+					if(data.success){
+						me.alertDiv("myAlertSuccess",data.msg);
+					}
+					me.query();
+				}
+			})
+		});
 	}
 });
