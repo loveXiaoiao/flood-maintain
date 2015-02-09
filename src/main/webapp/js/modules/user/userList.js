@@ -188,6 +188,6 @@ Surfilter.define("user.userList",{
 	},
 	
 	deleteUser : function(){
-		$(Surfilter.getTopBody()).find("#myAlertSuccess").show();
+		$(Surfilter.getTopBody()).find("#myModal").modal("show");
 	}
 });

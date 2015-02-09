@@ -49,6 +49,8 @@
 <!------------------------入口模块------------------------->
 <script type="text/javascript" src="${ctx }/static/common/main.js"></script>
 <!--****************************************JavaScript引入 end****************************************-->
+<!-- 引日messageBox.jsp -->
+<%@include file="/static/common/messageBox.jsp" %>
 <!--系统初始化javascript代码块start-->
 <script type="text/javascript">
 	var ctx = '${ctx }';
