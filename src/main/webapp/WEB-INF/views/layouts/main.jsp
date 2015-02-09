@@ -78,10 +78,37 @@ $(function(){
   
   
 	 <!-- 内容右 start -->
-	 <div class="span10">
+<div class="span10">
+		<div id="myAlertSuccess" class="alert alert-success hide">
+			<strong id="warningAlertMsg">成功!</strong>
+				<button type="button" class="close" onclick='javascript: $("#myAlertSuccess").hide();'>
+				  <span aria-hidden="true">&times;</span>
+				</button>
+		</div>
+			
+		<div id="myAlertInfo" class="alert alert-info hide">
+			<strong id="infoAlertMsg">信息!</strong>
+				<button type="button" class="close" onclick='javascript: $("#myAlertInfo").hide();'>
+				  <span aria-hidden="true">&times;</span>
+				</button>
+		</div>
+			
+		<div id="myAlertWarning" class="alert alert-warning hide">
+			<strong id="warningAlertMsg">警告!</strong>
+				<button type="button" class="close" onclick='javascript: $("#myAlertWarning").hide();'>
+				  <span aria-hidden="true">&times;</span>
+				</button>
+		</div>
+			 	
+		<div id="myAlertDanger" class="alert alert-danger hide">
+			<strong id="dangerAlertMsg">危险!</strong>
+				<button type="button" class="close" onclick='javascript: $("#myAlertDanger").hide();'>
+				  <span aria-hidden="true">&times;</span>
+				</button>
+		</div>
 	<iframe class="main-right" id="mainPage" frameborder=0 style="width:100%; overflow-y:hidden;">
 	</iframe>
-	</div>
+</div>
 </div>
 </div>
 </body>

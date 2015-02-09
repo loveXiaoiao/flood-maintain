@@ -37,7 +37,7 @@ Surfilter.define("user.userList",{
 			text : "删除",
 			iconCls : 'btn btn-danger',
 			handler : function(){
-				this.deleteUser();
+				me.deleteUser();
 			}
 		}];
 		
@@ -188,5 +188,6 @@ Surfilter.define("user.userList",{
 	},
 	
 	deleteUser : function(){
+		$(Surfilter.getTopBody()).find("#myAlertSuccess").show();
 	}
 });
