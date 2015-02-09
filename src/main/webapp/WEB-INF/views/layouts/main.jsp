@@ -27,15 +27,36 @@ $(function(){
 <body>
 <!-- 头部 start -->
 <div class="navbar navbar-inverse navbar-fixed-top">
-  <div class="navbar-inner">
+  <div class="navbar-inner ">
   	<div class="container-fluid">
   	<b class="brand">舆情运维系统</b>
+
+    <div class="pull-right top-right">
     <ul class="nav">
        <!-- 
 			一级菜单
 	    -->
 	</ul>
+	
+	
+	<div class="btn-group ">
+				<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+					<i class="icon-user"></i> <shiro:principal property="name"/>
+					<span class="caret"></span>
+				</a>
+			
+				<ul class="dropdown-menu pull-right">
+						<li><a href="${ctx}/admin/user">Admin Users</a></li>
+						<li class="divider"></li>
+					<li><a href="${ctx}/api">APIs</a></li>
+					<li><a href="${ctx}/profile">Edit Profile</a></li>
+					<li><a href="${ctx}/logout">Logout</a></li>
+				</ul>
+			</div>
 	</div>
+	</div>
+	
+			
   </div>
 </div>
 <!-- 头部 end -->

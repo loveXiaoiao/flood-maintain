@@ -1,7 +1,7 @@
-body{ font-family:"Î¢ÈíÑÅºÚ";}
+body{ font-family:"Î¢ï¿½ï¿½ï¿½Åºï¿½";}
 .nav-header{font-size:16px; text-shadow:none;color:#fff;}
-.well{background-color:#444; border:0; box-shadow:none; color:#fff;}
-.well:before{ content:""; width:14.52991452991453%; display:block; background-color:#444; 
+.well{background-color:#444; border:0; box-shadow:none; color:#fff; width:100%;}
+.well:before{ content:""; width:15%; display:block; background-color:#444; 
 position:fixed; top:0; bottom:0; z-index:-1;}
 .container-fluid{ padding-left:0; padding-right:0;}
 .nav-list>li>a, .nav-list .nav-header{ text-shadow:none;}
@@ -16,11 +16,14 @@ position:fixed; top:0; bottom:0; z-index:-1;}
 .nav-list>.actives>a, .nav-list>.actives>a:hover, .nav-list>.actives>a:focus{background-color:#5f5f5f;}
 .navbar-inverse .brand{ color:#fff; margin-left:10px; float:left:}
 .navbar-inverse .brand:hover{ color:#fff;}
-.navbar .nav{ float:right; margin:0px 10px 0 0;}
+.navbar .nav{ margin:0px 10px 0 0;}
 .datagrid-toolbar{ height:40px;}
 a.l-btn span span.l-btn-text{ width:50px; height:27px; line-height:27px;}
 a.l-btn span span.l-btn-icon-left{ padding-left:0;}
 .datagrid-cell, .datagrid-cell-group, .datagrid-header-rownumber, .datagrid-cell-rownumber.datagrid-wrap td{ height:35px; line-height:35px;}
 .datagrid-htable td{ background-color:#ececec;}
-.row-fluid .span10{width: 84.441880441880346%;}
-.row-fluid [class*="span"]{margin-left: 0.564102564102564%; margin-left: 0.564102564102564%;}
+.row-fluid .span10{width: 84%;}
+.row-fluid [class*="span"]{margin-left: 0.5%; margin-left: 0.5%;}
+.top-right{ margin-right:10px;}
+.row-fluid .span2{ width:15%;}
+a.l-btn:hover{ background:none; border:none;}

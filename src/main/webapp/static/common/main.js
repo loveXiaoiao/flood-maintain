@@ -24,9 +24,9 @@ Surfilter.ns("main",{
 		 * 重新建立一级菜单 HTML格式如下
 		 * <li><a href="#">任务管理</a></li>
 		 */
-		$('.navbar-inner ul').children().remove();
+		$('.navbar-inner ul.nav').children().remove();
 		$(Surfilter.menus).each(function(firstLevelIndex,firstLevelMenu){//遍历菜单数组
-			$('<li class="active"><a href="#">'+ firstLevelMenu.text +'</a></li>').appendTo('.navbar-inner ul').click(function(){
+			$('<li class="active"><a href="#">'+ firstLevelMenu.text +'</a></li>').appendTo('.navbar-inner ul.nav').click(function(){
 				// 显示二级菜单
 				$('.container-fluid').find('.span2').show();
 				
