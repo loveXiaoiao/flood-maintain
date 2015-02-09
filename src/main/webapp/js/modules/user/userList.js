@@ -188,6 +188,5 @@ Surfilter.define("user.userList",{
 	},
 	
 	deleteUser : function(){
-		
 	}
-})
+});
