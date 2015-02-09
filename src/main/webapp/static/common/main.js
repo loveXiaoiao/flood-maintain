@@ -78,7 +78,7 @@ Surfilter.ns("main",{
 				$('.sidebar-nav > ul li:first').click();
 			});
 		});
-		$('.navbar-inner ul').click();
+		$('.navbar-inner ul > li:eq(0)').click();//默认触发第一个一级菜单。
 	},
 	
 	/**
