@@ -22,7 +22,7 @@ margin-top: 60px;margin-bottom: 10px;padding: 15px;text-align: center;color: #ff
 -->
 </style>
 <body>
-<div class="logo">后台管理系统</div>
+<div class="logo">舆情维护系统</div>
 	<form id="loginForm" action="${ctx}/login" method="post" class="form-horizontal">
 	<%
 	String error = (String) request.getAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME);
