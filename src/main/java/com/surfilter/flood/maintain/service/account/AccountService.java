@@ -84,9 +84,6 @@ public class AccountService {
 	}
 
 	public void updateUser(User user) {
-		if(findUserByLoginName(user.getLoginName()) != null){
-			throw new ServiceException("用户名已存在");
-		}
 		if (StringUtils.isNotBlank(user.getPlainPassword())) {
 			entryptPassword(user);
 		}
@@ -128,7 +125,7 @@ public class AccountService {
 		byte[] hashPassword = Digests.sha1(user.getPlainPassword().getBytes(), salt, HASH_INTERATIONS);
 		user.setPassword(Encodes.encodeHex(hashPassword));
 	}
-
+	
 	@Autowired
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
