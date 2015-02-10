@@ -96,9 +96,16 @@ Surfilter.define("user.userList",{
 		}
 		$("#loginName").data("addOrUpdateFlag",addOrUpdateFlag);//缓存数据
 		$("#name").data("entity",entity);//缓存数据，因为到click方法里面会无效
+		$("#roles").data("executeTime",1);
 		$("#add_submit").click(function(){
 			var addOrUpdateFlag = $("#loginName").data("addOrUpdateFlag");
 			var entity = $("#name").data("entity");
+			var executeTime = $("#roles").data("executeTime");//这里有重复提交的问题，先暂时用这种办法解决
+			if(executeTime == 0){
+				return;
+			}else if(executeTime == 1){
+				$("#roles").data("executeTime",executeTime - 1);
+			}
 			var params = {};
 			if(addOrUpdateFlag == 2){//修改账号param多一个id的值
 				params['id'] = entity.id;
@@ -124,7 +131,6 @@ Surfilter.define("user.userList",{
 						$("#roles").val("");
 					}
 					me.query();
-					return;
 				}
 			})
 		});

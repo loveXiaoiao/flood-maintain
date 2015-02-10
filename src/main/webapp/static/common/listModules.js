@@ -108,5 +108,21 @@ Surfilter.define("common.listModules",{
 	alertDiv : function(alertDivName,content){
 		$(Surfilter.getTopBody()).find("#" + alertDivName + " > strong").html(content);
 		$(Surfilter.getTopBody()).find("#" + alertDivName + "").show();
-	}
+		var time = 2000;
+		var interval;
+		function run(){
+		    interval = setInterval(fun,time);
+		    interval2 = setInterval(checkHide,time);
+		}
+		function fun(){
+			$(Surfilter.getTopBody()).find("#" + alertDivName + "").hide();
+		}
+		function checkHide(){
+		  if($(Surfilter.getTopBody()).find("#" + alertDivName + ":hidden")){
+		      clearInterval(interval);
+		      clearInterval(interval2);
+		    }
+		}
+		run();
+	},
 },true)
