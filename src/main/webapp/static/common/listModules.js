@@ -109,7 +109,6 @@ Surfilter.define("common.listModules",{
 		$(Surfilter.getTopBody()).find("#" + alertDivName + " > strong").html(content);
 		$(Surfilter.getTopBody()).find("#" + alertDivName + "").show();
 		var time = 2000;
-		var interval;
 		function run(){
 		    interval = setInterval(fun,time);
 		    interval2 = setInterval(checkHide,time);
@@ -124,5 +123,5 @@ Surfilter.define("common.listModules",{
 		    }
 		}
 		run();
-	},
-},true)
+	}
+},true);
